@@ -23,7 +23,6 @@ model ComponentType {
 model Component {
   id        Int           @id @default(autoincrement())
   type      ComponentType @relation(fields: [typeId], references: [id])
-  enabled   Boolean       @default(true)
   title     String?
   thumbnail String?
   uris      Uri[]
@@ -33,14 +32,25 @@ model Revision {
   id          Int       @id @default(autoincrement())
   component   Component @relation(fields: [componentId], references: [id])
   revision    Int
+  enabled     Boolean       @default(true)
   isDraft     Boolean  @default(true)
-  content     Content  @relation(fields: [contentId], references: [id])
+}
+
+model RevisionContent {
+  revision Int @relation(fields: [revisionId], references: [id])
+  content Int @relation(fields: [contentId], references: [id])
 }
 
 model Content {
   id          Int       @id @default(autoincrement())
   fieldName   String
   content     String
+}
+
+model RevisionCron {
+  id Int
+  revision Int @relation()
+  enableAt DateTime
 }
 
 model Uri {
