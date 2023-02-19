@@ -1,6 +1,6 @@
 import {ActionArgs, redirect} from "@remix-run/node";
 import {RemixCmsActionArgs} from "./action";
-import {getSession} from "../session";
+import {getSession} from "../utils/session";
 
 type RemixCmsLoader = {
     authenticated?: boolean;

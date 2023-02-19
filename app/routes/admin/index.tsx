@@ -1,7 +1,7 @@
 import {remixCmsLoader} from "~/../admin/routing/loader";
 import {useLoaderData} from "@remix-run/react";
 import {json} from "@remix-run/node";
-import {db} from "../../../admin/utils/db";
+import {db} from "remixCms/utils/db";
 
 export const loader = remixCmsLoader({
     authenticated: true,

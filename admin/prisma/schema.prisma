@@ -1,6 +1,6 @@
 datasource db {
-    provider = "mysql"
-    url      = env("DATABASE_URL")
+  provider = "mysql"
+  url      = env("DATABASE_URL")
 }
 
 generator client {
@@ -8,14 +8,44 @@ generator client {
 }
 
 model User {
-    id       Int      @id @default(autoincrement())
-    email    String   @unique
-    password String
-    name     String?
+  id       Int     @id @default(autoincrement())
+  email    String  @unique
+  password String
+  name     String?
 }
 
 model ComponentType {
-    id     Int    @id @default(autoincrement())
-    name   String
-    handle String @unique
+  id     Int    @id @default(autoincrement())
+  name   String
+  handle String @unique
+}
+
+model Component {
+  id        Int           @id @default(autoincrement())
+  type      ComponentType @relation(fields: [typeId], references: [id])
+  enabled   Boolean       @default(true)
+  title     String?
+  thumbnail String?
+  uris      Uri[]
+}
+
+model Revision {
+  id          Int       @id @default(autoincrement())
+  component   Component @relation(fields: [componentId], references: [id])
+  revision    Int
+  isDraft     Boolean  @default(true)
+  content     Content  @relation(fields: [contentId], references: [id])
+}
+
+model Content {
+  id          Int       @id @default(autoincrement())
+  fieldName   String
+  content     String
+}
+
+model Uri {
+  id          Int       @id @default(autoincrement())
+  component   Component @relation(fields: [componentId], references: [id])
+  uri         String
+  componentId Int
 }

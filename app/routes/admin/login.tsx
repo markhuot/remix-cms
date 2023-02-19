@@ -1,13 +1,13 @@
-import type { RemixCmsActionArgs} from "../../../admin/routing/action";
-import {remixCmsAction} from "../../../admin/routing/action";
+import type { RemixCmsActionArgs} from "remixCms/routing/action";
+import {remixCmsAction} from "remixCms/routing/action";
 import {z} from "zod";
 import bcrypt from "bcryptjs";
-import {db} from "../../../admin/utils/db";
-import {abort_if, abort_unless} from "../../../admin/utils/control-flow";
+import {db} from "remixCms/utils/db";
+import {abort_if, abort_unless} from "remixCms/utils/control-flow";
 import {useActionData} from "@remix-run/react";
-import {commitSession, getSession} from "../../../admin/session";
+import {commitSession, getSession} from "remixCms/utils/session";
 import {redirect} from "@remix-run/node";
-import {remixCmsLoader} from "../../../admin/routing/loader";
+import {remixCmsLoader} from "remixCms/routing/loader";
 
 export const loader = remixCmsLoader({
     authenticated: false,
